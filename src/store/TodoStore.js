@@ -1,6 +1,6 @@
 import { decorate, observable, action, extendObservable } from "mobx";
 
-class TodoStore {
+export default class TodoStore {
   list = [];
   isInputEmpty = null;
   todo = {
@@ -138,4 +138,17 @@ decorate(TodoStore, {
   onDeleteTodo: action,
 });
 
-export default new TodoStore();
+// reaction(
+//   () => JSON.stringify(Store),
+//   (json) => {
+//     localStorage.setItem("store", Store);
+//   },
+//   {
+//     delay: 500,
+//   }
+// );
+
+// let json = localStorage.getItem("store");
+// if (json) {
+//   Object.assign(store, JSON.parse(json));
+// }

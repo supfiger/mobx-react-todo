@@ -5,7 +5,7 @@ import { Todo } from "../index";
 import "./List.sass";
 
 const List = (props) => {
-  const { list } = props.store;
+  const { list } = props.store.TodoStore;
 
   return (
     <ul className="List">

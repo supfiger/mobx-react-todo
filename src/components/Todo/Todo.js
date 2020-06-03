@@ -36,7 +36,9 @@ const Todo = (props) => {
       isEdit,
       date: { time, day },
     },
-    store: { onDeleteTodo, toggleComplete, onEditTodo, onChangeInput },
+    store: {
+      TodoStore: { onDeleteTodo, toggleComplete, onEditTodo, onChangeInput },
+    },
   } = props;
 
   return (

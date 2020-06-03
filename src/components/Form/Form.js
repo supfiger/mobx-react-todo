@@ -11,7 +11,7 @@ const Form = (props) => {
     onEnterPress,
     todo,
     isInputEmpty,
-  } = props.store;
+  } = props.store.TodoStore;
   const { text } = todo;
 
   return (

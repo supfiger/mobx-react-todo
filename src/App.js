@@ -7,7 +7,7 @@ import "./App.sass";
 @inject("store")
 export default class App extends Component {
   componentDidMount() {
-    this.props.store.setFocus();
+    this.props.store.TodoStore.setFocus();
   }
 
   render() {

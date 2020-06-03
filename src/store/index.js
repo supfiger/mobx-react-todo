@@ -113,8 +113,7 @@ class Store {
   onSaveTodo = (id) => {};
 
   onDeleteTodo = (id) => {
-    const list = this.list;
-    this.list = list.filter((item) => item.id !== id);
+    this.list = this.list.filter((item) => item.id !== id);
   };
 
   onChangeInput = (e) => {

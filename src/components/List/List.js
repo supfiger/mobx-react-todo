@@ -5,12 +5,15 @@ import { observer } from "mobx-react";
 import { Todo } from "../index";
 
 const List = (props) => {
-  const { list } = props.store;
+  const {
+    store,
+    store: { list },
+  } = props;
 
   return (
     <ul className="List">
       {list.map((todo) => (
-        <Todo key={todo.id} todo={todo} />
+        <Todo store={store} key={todo.id} todo={todo} />
       ))}
     </ul>
   );

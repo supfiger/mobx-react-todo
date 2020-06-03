@@ -6,19 +6,20 @@ import "./Todo.sass";
 
 const Todo = (props) => {
   const {
-    todo: {
-      completed,
-      text,
-      id,
-      isEdit,
-      date: { time, day },
-    },
+    completed,
+    text,
+    id,
+    isEdit,
+    date: { time, day },
+  } = props.todo;
+
+  const {
     onDeleteTodo,
     toggleComplete,
     onEditTodo,
     onSaveTodo,
     onChangeInput,
-  } = props;
+  } = props.store;
 
   const todoInfo = () => {
     if (isEdit) {

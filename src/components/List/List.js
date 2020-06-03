@@ -1,8 +1,8 @@
 import React from "react";
-import "./List.sass";
 import { observer, inject } from "mobx-react";
 
 import { Todo } from "../index";
+import "./List.sass";
 
 const List = (props) => {
   const { list } = props.store;

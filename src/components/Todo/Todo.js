@@ -4,39 +4,40 @@ import { observer, inject } from "mobx-react";
 
 import "./Todo.sass";
 
-const Todo = (props) => {
+const TodoContent = (props) => {
   const {
-    completed,
-    text,
-    id,
-    isEdit,
-    date: { time, day },
-  } = props.todo;
-
-  const {
-    onDeleteTodo,
-    toggleComplete,
-    onEditTodo,
-    onSaveTodo,
+    todo: { completed, text, isEdit },
     onChangeInput,
-  } = props.store;
+    onSaveTodo,
+  } = props;
 
-  const todoInfo = () => {
-    if (isEdit) {
-      return (
-        <div className="saveTodoWrap">
-          <input onChange={(e) => onChangeInput(e)} type="text" value={text} />
-          <button onClick={() => onSaveTodo()}>Save</button>
-        </div>
-      );
-    }
-
+  if (isEdit) {
+    return (
+      <div className="saveTodoWrap">
+        <input onChange={(e) => onChangeInput(e)} type="text" value={text} />
+        <button onClick={() => onSaveTodo()}>Save</button>
+      </div>
+    );
+  } else {
     return (
       <div className={classNames("todoText", { textCrossOut: completed })}>
         {text}
       </div>
     );
-  };
+  }
+};
+
+const Todo = (props) => {
+  const {
+    todo: {
+      completed,
+      text,
+      id,
+      isEdit,
+      date: { time, day },
+    },
+    store: { onDeleteTodo, toggleComplete, onEditTodo, onChangeInput },
+  } = props;
 
   return (
     <li className="Todo">
@@ -48,7 +49,7 @@ const Todo = (props) => {
       >
         {completed && `✓`}
       </div>
-      {todoInfo()}
+      <TodoContent {...props} />
       <div className="todoActions">
         <div
           onClick={() => onEditTodo(id)}

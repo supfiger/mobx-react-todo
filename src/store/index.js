@@ -78,8 +78,6 @@ class Store {
     this.todo = todo;
     this.list = list;
 
-    console.log("list", list);
-
     this.resetData();
   };
 

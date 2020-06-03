@@ -1,17 +1,44 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import { observer } from "mobx-react";
+import { configure } from "mobx";
+
+import "./App.sass";
+import { List, Form, Input } from "./components/index";
+import store from "./store";
+import myStore from "./store/InputStore";
+
+import "./index.css";
+import * as serviceWorker from "./serviceWorker";
+
+configure({ enforceActions: "observed" });
+
+@observer
+class App extends Component {
+  componentDidMount() {
+    // const { setFocus } = store;
+    // setFocus();
+  }
+
+  render() {
+    const { myStore } = this.props;
+    const { store } = this.props;
+    return (
+      <div className="App">
+        <div className="content">
+          <div className="contentIn">
+            <h2 className="appTitle">Todo app</h2>
+            <Form store={store} />
+            <List store={store} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <App myStore={myStore} store={store} />,
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

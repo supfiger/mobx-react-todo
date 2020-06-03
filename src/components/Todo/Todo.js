@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 
 import "./Todo.sass";
 
@@ -70,4 +70,4 @@ const Todo = (props) => {
   );
 };
 
-export default observer(Todo);
+export default inject("store")(observer(Todo));

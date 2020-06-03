@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 
 import "./Form.sass";
 
@@ -39,4 +39,4 @@ const Form = (props) => {
   );
 };
 
-export default observer(Form);
+export default inject("store")(observer(Form));

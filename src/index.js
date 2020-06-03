@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { observer } from "mobx-react";
+import { Provider } from "mobx-react";
 import { configure } from "mobx";
 
 import "./App.sass";
@@ -13,23 +13,20 @@ import * as serviceWorker from "./serviceWorker";
 
 configure({ enforceActions: "observed" });
 
-@observer
 class App extends Component {
   componentDidMount() {
-    // const { setFocus } = store;
-    // setFocus();
+    const { setFocus } = store;
+    setFocus();
   }
 
   render() {
-    const { myStore } = this.props;
-    const { store } = this.props;
     return (
       <div className="App">
         <div className="content">
           <div className="contentIn">
             <h2 className="appTitle">Todo app</h2>
-            <Form store={store} />
-            <List store={store} />
+            <Form />
+            <List />
           </div>
         </div>
       </div>
@@ -37,8 +34,11 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(
-  <App myStore={myStore} store={store} />,
-  document.getElementById("root")
+const Root = () => (
+  <Provider store={store}>
+    <App myStore={myStore} />;
+  </Provider>
 );
+
+ReactDOM.render(<Root />, document.getElementById("root"));
 serviceWorker.unregister();

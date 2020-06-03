@@ -1,22 +1,19 @@
 import React from "react";
 import "./List.sass";
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 
 import { Todo } from "../index";
 
 const List = (props) => {
-  const {
-    store,
-    store: { list },
-  } = props;
+  const { list } = props.store;
 
   return (
     <ul className="List">
       {list.map((todo) => (
-        <Todo store={store} key={todo.id} todo={todo} />
+        <Todo key={todo.id} todo={todo} />
       ))}
     </ul>
   );
 };
 
-export default observer(List);
+export default inject("store")(observer(List));

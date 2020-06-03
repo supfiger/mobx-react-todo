@@ -1,6 +1,6 @@
 import { decorate, observable, action, extendObservable } from "mobx";
 
-class Store {
+class TodoStore {
   list = [];
   isInputEmpty = null;
   todo = {
@@ -120,7 +120,7 @@ class Store {
   };
 }
 
-decorate(Store, {
+decorate(TodoStore, {
   list: observable,
   isInputEmpty: observable,
   todo: observable,
@@ -138,6 +138,4 @@ decorate(Store, {
   onDeleteTodo: action,
 });
 
-const store = new Store();
-
-export default store;
+export default new TodoStore();

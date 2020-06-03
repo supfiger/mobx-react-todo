@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { inject } from "mobx-react";
 
-import { List, Form, Input } from "./components/index";
+import { List, Form } from "./components/index";
 import "./App.sass";
 
 @inject("store")

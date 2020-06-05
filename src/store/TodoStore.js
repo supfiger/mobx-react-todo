@@ -1,4 +1,5 @@
 import { decorate, observable, action, extendObservable } from "mobx";
+import { persist } from "mobx-persist";
 
 export default class TodoStore {
   list = [];
@@ -121,9 +122,9 @@ export default class TodoStore {
 }
 
 decorate(TodoStore, {
-  list: observable,
-  isInputEmpty: observable,
-  todo: observable,
+  list: [observable, persist("list")],
+  isInputEmpty: [observable, persist],
+  todo: [observable, persist("object")],
   resetData: action,
   toggleComplete: action,
   onChangeInput: action,

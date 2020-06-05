@@ -4,29 +4,6 @@ import { observer, inject } from "mobx-react";
 
 import "./Todo.sass";
 
-const TodoContent = (props) => {
-  const {
-    todo: { completed, text, isEdit },
-    onChangeInput,
-    onSaveTodo,
-  } = props;
-
-  if (isEdit) {
-    return (
-      <div className="saveTodoWrap">
-        <input onChange={(e) => onChangeInput(e)} type="text" value={text} />
-        <button onClick={() => onSaveTodo()}>Save</button>
-      </div>
-    );
-  } else {
-    return (
-      <div className={classNames("todoText", { textCrossOut: completed })}>
-        {text}
-      </div>
-    );
-  }
-};
-
 const Todo = (props) => {
   const {
     todo: {
@@ -37,7 +14,13 @@ const Todo = (props) => {
       date: { time, day },
     },
     store: {
-      TodoStore: { onDeleteTodo, toggleComplete, onEditTodo, onChangeInput },
+      TodoStore: {
+        onDeleteTodo,
+        toggleComplete,
+        onEditTodo,
+        onChangeInput,
+        onSaveTodo,
+      },
     },
   } = props;
 
@@ -51,7 +34,16 @@ const Todo = (props) => {
       >
         {completed && `✓`}
       </div>
-      <TodoContent {...props} />
+      {isEdit ? (
+        <div className="saveTodoWrap">
+          <input onChange={(e) => onChangeInput(e)} type="text" value={text} />
+          <button onClick={() => onSaveTodo()}>Save</button>
+        </div>
+      ) : (
+        <div className={classNames("todoText", { textCrossOut: completed })}>
+          {text}
+        </div>
+      )}
       <div className="todoActions">
         <div
           onClick={() => onEditTodo(id)}

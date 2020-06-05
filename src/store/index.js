@@ -1,25 +1,13 @@
-import { reaction, toJS } from "mobx";
+import { create } from "mobx-persist";
 import TodoStore from "./TodoStore";
+
+const hydrate = create();
 
 class Store {
   constructor() {
     this.TodoStore = new TodoStore(this);
+    hydrate("TodoStore", this.TodoStore);
   }
-}
-
-reaction(
-  () => JSON.stringify(Store),
-  (json) => {
-    localStorage.setItem("store", json);
-  },
-  {
-    delay: 500,
-  }
-);
-
-let json = localStorage.getItem("store");
-if (json) {
-  Object.assign(Store, JSON.parse(json));
 }
 
 export default new Store();

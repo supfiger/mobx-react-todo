@@ -9,7 +9,7 @@ export default class TodoStore {
     id: null,
     completed: false,
     date: null,
-    isEdit: false,
+    editing: false,
   };
 
   resetData = () => {
@@ -20,22 +20,18 @@ export default class TodoStore {
         id: null,
         completed: false,
         date: null,
-        isEdit: false,
+        editing: false,
       },
     });
   };
 
   toggleComplete = (id) => {
-    let todo = { ...this.todo };
-    let list = [...this.list];
+    const list = [...this.list];
 
     list.map((todo) => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
       }
-      this.todo = todo;
-      this.list = list;
-      return todo;
     });
   };
 
@@ -69,8 +65,8 @@ export default class TodoStore {
   };
 
   updateList = () => {
-    let todo = { ...this.todo };
-    let list = [...this.list];
+    const todo = { ...this.todo };
+    const list = [...this.list];
 
     todo.id = Date.now();
     todo.date = this.todoGetDate();
@@ -83,7 +79,7 @@ export default class TodoStore {
   };
 
   onAddTodo = () => {
-    const text = this.todo.text;
+    const { text } = this.todo;
     const isValid = this.validate(text);
 
     if (isValid) {
@@ -99,14 +95,17 @@ export default class TodoStore {
   };
 
   onEditTodo = (id) => {
-    const list = this.list;
+    const list = [...this.list];
 
     list.map((todo) => {
       if (todo.id === id) {
-        todo.isEdit = !todo.isEdit;
+        todo.editing = !todo.editing;
+        this.todo = todo;
       }
-      return todo;
     });
+
+    this.list = list;
+    console.log("editing", this.todo.editing);
   };
 
   onSaveTodo = (id) => {};
@@ -115,9 +114,34 @@ export default class TodoStore {
     this.list = this.list.filter((item) => item.id !== id);
   };
 
-  onChangeInput = (e) => {
+  onChangeFormInput = (e) => {
     this.todo.text = e.target.value;
     this.isInputEmpty = false;
+  };
+
+  onChangeTodoInput = (e) => {
+    const todo = { ...this.todo };
+    todo.text = e.target.value;
+    console.log("todo", todo);
+    this.todo.text = todo.text;
+  };
+
+  onClearList = () => {
+    let newList = [...this.list];
+    newList = [];
+
+    this.list = newList;
+  };
+
+  onFilterList = (e) => {
+    const filterName = e.target.name;
+
+    switch (filterName) {
+      case "completed":
+        break;
+      default:
+        break;
+    }
   };
 }
 
@@ -127,7 +151,8 @@ decorate(TodoStore, {
   todo: [observable, persist("object")],
   resetData: action,
   toggleComplete: action,
-  onChangeInput: action,
+  onChangeFormInput: action,
+  onChangeTodoInput: action,
   setFocus: action,
   validate: action,
   todoGetDate: action,
@@ -137,4 +162,6 @@ decorate(TodoStore, {
   onEditTodo: action,
   onSaveTodo: action,
   onDeleteTodo: action,
+  onClearList: action,
+  onFilterList: action,
 });

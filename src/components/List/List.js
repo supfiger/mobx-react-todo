@@ -6,12 +6,11 @@ import "./List.sass";
 
 const List = (props) => {
   const { list } = props.store.TodoStore;
+  const isList = list !== null && list.length > 0;
 
   return (
     <ul className="List">
-      {list.map((todo) => (
-        <Todo key={todo.id} todo={todo} />
-      ))}
+      {isList && list.map((todo) => <Todo key={todo.id} {...todo} />)}
     </ul>
   );
 };

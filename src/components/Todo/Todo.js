@@ -6,23 +6,26 @@ import "./Todo.sass";
 
 const Todo = (props) => {
   const {
-    todo: {
-      completed,
-      text,
-      id,
-      isEdit,
-      date: { time, day },
-    },
+    completed,
+    text,
+    id,
+    editing,
+    date: { time, day },
     store: {
       TodoStore: {
         onDeleteTodo,
         toggleComplete,
         onEditTodo,
-        onChangeInput,
+        onChangeTodoInput,
         onSaveTodo,
+        onEnterPress,
       },
     },
   } = props;
+
+  const editTodo = (e) => {
+    onChangeTodoInput(e);
+  };
 
   return (
     <li className="Todo">
@@ -34,9 +37,15 @@ const Todo = (props) => {
       >
         {completed && `✓`}
       </div>
-      {isEdit ? (
-        <div className="saveTodoWrap">
-          <input onChange={(e) => onChangeInput(e)} type="text" value={text} />
+      {editing ? (
+        <div className="editTodoWrap">
+          <input
+            name="editTodo"
+            type="text"
+            value={text}
+            onChange={editTodo}
+            // onKeyPress={(e) => onEnterPress(e)}
+          />
           <button onClick={() => onSaveTodo()}>Save</button>
         </div>
       ) : (
@@ -48,7 +57,7 @@ const Todo = (props) => {
         <div
           onClick={() => onEditTodo(id)}
           className={classNames("todoEdit", {
-            isEdit: isEdit,
+            editing: editing,
           })}
         >
           ✎

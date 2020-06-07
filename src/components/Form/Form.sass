@@ -20,10 +20,17 @@
   border: 0
   padding: 7px 10px
   width: 100%
-  &:focus 
+  &:focus  
     outline: none
 
-.addTodoButton
+.formButtons
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 100%
+
+.addTodoButton 
   font-family: Roboto
   background-color: #cbdbff
   font-size: 15px
@@ -37,3 +44,15 @@
     background: #1040f191
   &:focus 
     outline: none
+
+.filters
+  position: absolute
+  right: 0
+  display: flex
+
+  button
+    padding: 5px 8px
+    border-radius: 7px
+    border: 1px solid #abaaaa
+    margin-right: 10px
+

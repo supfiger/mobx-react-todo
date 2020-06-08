@@ -18,11 +18,7 @@ const Filters = (props) => {
         <button name="all" onClick={(e) => onFilterList(e)}>
           All
         </button>
-        <button
-          name="clear"
-          className="clearListButton"
-          onClick={(e) => onFilterList(e)}
-        >
+        <button name="clear" onClick={(e) => onFilterList(e)}>
           Clear List
         </button>
       </div>

@@ -28,7 +28,7 @@ const Todo = (props) => {
   const editTodo = () => {
     onEditTodo(id);
 
-    !editing && setTimeout(() => textInput.current.focus());
+    !editing && setTimeout(() => textInput.current.focus(), 0);
   };
 
   return (

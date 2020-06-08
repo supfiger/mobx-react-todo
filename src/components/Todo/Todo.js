@@ -23,12 +23,12 @@ const Todo = (props) => {
     },
   } = props;
 
-  const textInput = useRef(null); 
+  const textInput = useRef();
 
-  const editTodo = async () => {
-    await onEditTodo(id);
+  const editTodo = () => {
+    onEditTodo(id);
 
-    !editing && textInput.current.focus();
+    !editing && setTimeout(() => textInput.current.focus());
   };
 
   return (
@@ -43,6 +43,7 @@ const Todo = (props) => {
         <div className="editTodoWrap">
           <input
             name="editTodo"
+            data-id={id}
             type="text"
             value={text}
             onChange={(e) => onChangeTodoInput(id, e)}

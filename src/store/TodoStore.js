@@ -97,13 +97,19 @@ export default class TodoStore {
     }
   };
 
-  onEditTodo = (id) => {
+  getEditingTodo = () => {
     const list = [...this.list];
 
     const editingTodoIndex = list.findIndex((todo) => todo.editing === true);
+    const editingTodo = list[editingTodoIndex];
+    return editingTodo;
+  };
+
+  onEditTodo = (id) => {
+    const list = [...this.list];
     const clickedIndex = list.findIndex((todo) => todo.id === id);
 
-    const editingTodo = list[editingTodoIndex];
+    const editingTodo = this.getEditingTodo();
     const isEditing = editingTodo && editingTodo.editing;
     const clickedTodo = list[clickedIndex];
 
@@ -173,6 +179,12 @@ export default class TodoStore {
   onClearInput = () => {
     this.text = "";
   };
+
+  onRenderPage = () => {
+    // const editingTodo = this.getEditingTodo();
+
+    this.setFocus();
+  };
 }
 
 decorate(TodoStore, {
@@ -191,5 +203,4 @@ decorate(TodoStore, {
   onDeleteTodo: action,
   onFilterList: action,
   onClearInput: action,
-  onRenderPage: action,
 });

@@ -12,7 +12,8 @@ const List = (props) => {
 
   return (
     <ul className="List">
-      {isList && currentList.map((todo) => <Todo key={todo.id} {...todo} />)}
+      {isList &&
+        currentList.reverse().map((todo) => <Todo key={todo.id} {...todo} />)}
     </ul>
   );
 };

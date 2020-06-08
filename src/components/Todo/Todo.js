@@ -23,10 +23,6 @@ const Todo = (props) => {
     },
   } = props;
 
-  const editTodo = (e) => {
-    onChangeTodoInput(e);
-  };
-
   return (
     <li className="Todo">
       <div
@@ -43,7 +39,7 @@ const Todo = (props) => {
             name="editTodo"
             type="text"
             value={text}
-            onChange={editTodo}
+            onChange={(id, e) => onChangeTodoInput(id, e)}
             // onKeyPress={(e) => onEnterPress(e)}
           />
           <button onClick={() => onSaveTodo()}>Save</button>

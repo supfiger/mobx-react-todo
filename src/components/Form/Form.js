@@ -6,13 +6,12 @@ import "./Form.sass";
 
 const Form = (props) => {
   const {
-    todo: { text },
+    text,
     onChangeFormInput,
     onAddTodo,
-    onClearList,
     onEnterPress,
     isInputEmpty,
-    onFilterList,
+    onClearInput,
   } = props.store.TodoStore;
 
   return (
@@ -31,23 +30,14 @@ const Form = (props) => {
           onChange={(e) => onChangeFormInput(e)}
           onKeyPress={(e) => onEnterPress(e)}
         />
+        <button className="clearInputButton" onClick={() => onClearInput()}>
+          ×
+        </button>
       </div>
       <div className="formButtons">
         <button className="addTodoButton" onClick={() => onAddTodo()}>
           Add
         </button>
-        <div className="filters">
-          <button
-            name="completed"
-            className="completedFilterButton"
-            onClick={(e) => onFilterList(e)}
-          >
-            Completed
-          </button>
-          <button className="clearListButton" onClick={() => onClearList()}>
-            Clear All
-          </button>
-        </div>
       </div>
     </div>
   );

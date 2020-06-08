@@ -9,6 +9,23 @@
   border-bottom: 1px solid #cccccc
   width: 220px
   margin-bottom: 20px
+  position: relative
+  display: flex
+  align-items: center
+
+.clearInputButton
+  position: absolute
+  right: 0
+  margin-right: -20px
+  cursor: pointer
+  background: transparent
+  border: none
+  font-size: 18px
+  padding: 0
+  &:hover
+    color: red
+  &:focus
+    outline: none
 
 .inputWrapEmpty
   border-bottom: 1px solid red
@@ -24,11 +41,9 @@
     outline: none
 
 .formButtons
-  position: relative
   display: flex
   align-items: center
   justify-content: center
-  width: 100%
 
 .addTodoButton 
   font-family: Roboto
@@ -45,14 +60,4 @@
   &:focus 
     outline: none
 
-.filters
-  position: absolute
-  right: 0
-  display: flex
-
-  button
-    padding: 5px 8px
-    border-radius: 7px
-    border: 1px solid #abaaaa
-    margin-right: 10px
 

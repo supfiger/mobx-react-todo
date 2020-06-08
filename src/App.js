@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { inject } from "mobx-react";
 
-import { List, Form } from "./components/index";
+import { List, Form, Filters } from "./components/index";
 import "./App.sass";
 
 @inject("store")
@@ -18,6 +18,7 @@ export default class App extends Component {
             <h2 className="appTitle">Todo app</h2>
             <Form />
             <List />
+            <Filters />
           </div>
         </div>
       </div>

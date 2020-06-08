@@ -1,28 +1,15 @@
-import { decorate, observable, action, extendObservable } from "mobx";
+import { decorate, observable, action } from "mobx";
 import { persist } from "mobx-persist";
 
 export default class TodoStore {
   list = [];
+  filteredList = [];
   isInputEmpty = null;
-  todo = {
-    text: "",
-    id: null,
-    completed: false,
-    date: null,
-    editing: false,
-  };
+  text = "";
 
   resetData = () => {
-    extendObservable(this, {
-      isInputEmpty: null,
-      todo: {
-        text: "",
-        id: null,
-        completed: false,
-        date: null,
-        editing: false,
-      },
-    });
+    this.isInputEmpty = null;
+    this.text = "";
   };
 
   toggleComplete = (id) => {
@@ -31,8 +18,11 @@ export default class TodoStore {
     list.map((todo) => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
+        return todo;
       }
     });
+
+    this.list = list;
   };
 
   setFocus = () => {
@@ -65,21 +55,24 @@ export default class TodoStore {
   };
 
   updateList = () => {
-    const todo = { ...this.todo };
     const list = [...this.list];
 
-    todo.id = Date.now();
-    todo.date = this.todoGetDate();
-    list.push(todo);
+    const todo = {
+      text: this.text,
+      id: Date.now(),
+      completed: false,
+      date: this.todoGetDate(),
+      editing: false,
+    };
 
-    this.todo = todo;
+    list.push(todo);
     this.list = list;
 
     this.resetData();
   };
 
   onAddTodo = () => {
-    const { text } = this.todo;
+    const { text } = this;
     const isValid = this.validate(text);
 
     if (isValid) {
@@ -100,12 +93,10 @@ export default class TodoStore {
     list.map((todo) => {
       if (todo.id === id) {
         todo.editing = !todo.editing;
-        this.todo = todo;
       }
     });
 
     this.list = list;
-    console.log("editing", this.todo.editing);
   };
 
   onSaveTodo = (id) => {};
@@ -115,40 +106,60 @@ export default class TodoStore {
   };
 
   onChangeFormInput = (e) => {
-    this.todo.text = e.target.value;
+    this.text = e.target.value;
     this.isInputEmpty = false;
   };
 
-  onChangeTodoInput = (e) => {
-    const todo = { ...this.todo };
-    todo.text = e.target.value;
-    console.log("todo", todo);
-    this.todo.text = todo.text;
-  };
+  onChangeTodoInput = (id, e) => {
+    const list = [...this.list];
 
-  onClearList = () => {
-    let newList = [...this.list];
-    newList = [];
+    list.map((todo) => {
+      if (todo.id === id) {
+        todo.text = e.target.value;
+      }
+    });
 
-    this.list = newList;
+    this.list = list;
   };
 
   onFilterList = (e) => {
     const filterName = e.target.name;
+    const list = [...this.list];
 
     switch (filterName) {
+      case "active":
+        this.filteredList = list.filter((todo) => !todo.completed);
+        break;
       case "completed":
+        this.filteredList = list.filter((todo) => todo.completed);
+        break;
+      case "all":
+        this.filteredList = [];
+        this.list = list;
+        break;
+      case "clear":
+        this.filteredList = [];
+        this.list = [];
         break;
       default:
         break;
     }
   };
+
+  onClearInput = () => {
+    this.text = "";
+  };
+
+  getFilteredList = () => {
+    return this.filteredList;
+  };
 }
 
 decorate(TodoStore, {
   list: [observable, persist("list")],
+  filteredList: [observable, persist("list")],
   isInputEmpty: [observable, persist],
-  todo: [observable, persist("object")],
+  text: [observable, persist],
   resetData: action,
   toggleComplete: action,
   onChangeFormInput: action,
@@ -162,6 +173,6 @@ decorate(TodoStore, {
   onEditTodo: action,
   onSaveTodo: action,
   onDeleteTodo: action,
-  onClearList: action,
   onFilterList: action,
+  onClearInput: action,
 });

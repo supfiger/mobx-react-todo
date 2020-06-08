@@ -5,12 +5,14 @@ import { Todo } from "../index";
 import "./List.sass";
 
 const List = (props) => {
-  const { list } = props.store.TodoStore;
-  const isList = list !== null && list.length > 0;
+  const { list, filteredList } = props.store.TodoStore;
+
+  const currentList = filteredList.length > 0 ? filteredList : list;
+  const isList = currentList !== null && currentList.length > 0;
 
   return (
     <ul className="List">
-      {isList && list.map((todo) => <Todo key={todo.id} {...todo} />)}
+      {isList && currentList.map((todo) => <Todo key={todo.id} {...todo} />)}
     </ul>
   );
 };

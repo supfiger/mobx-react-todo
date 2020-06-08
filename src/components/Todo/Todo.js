@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import classNames from "classnames";
 import { observer, inject } from "mobx-react";
 
@@ -23,6 +23,14 @@ const Todo = (props) => {
     },
   } = props;
 
+  const textInput = useRef(null); 
+
+  const editTodo = async () => {
+    await onEditTodo(id);
+
+    !editing && textInput.current.focus();
+  };
+
   return (
     <li className="Todo">
       <div
@@ -39,6 +47,7 @@ const Todo = (props) => {
             value={text}
             onChange={(e) => onChangeTodoInput(id, e)}
             onKeyPress={(e) => onEnterPress(e, "save", id)}
+            ref={textInput}
           />
           <button onClick={() => onSaveTodo(id)}>Save</button>
         </div>
@@ -49,7 +58,7 @@ const Todo = (props) => {
       )}
       <div className="todoActions">
         <div
-          onClick={() => onEditTodo(id)}
+          onClick={editTodo}
           className={classNames("todoEdit", { editing: editing })}
         >
           ✎

@@ -120,9 +120,12 @@ export default class TodoStore {
     const list = [...this.list];
     const index = list.findIndex((todo) => todo.id === id);
     const todo = list[index];
-    todo.editing = false;
+    const isValid = this.validate(todo.text);
 
-    this.list = list;
+    if (isValid) {
+      todo.editing = false;
+      this.list = list;
+    }
   };
 
   onDeleteTodo = (id) => {
@@ -188,4 +191,5 @@ decorate(TodoStore, {
   onDeleteTodo: action,
   onFilterList: action,
   onClearInput: action,
+  onRenderPage: action,
 });

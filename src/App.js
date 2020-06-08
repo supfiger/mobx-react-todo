@@ -14,12 +14,10 @@ export default class App extends Component {
     return (
       <div className="App">
         <div className="content">
-          <div className="contentIn">
-            <h2 className="appTitle">Todo app</h2>
-            <Form />
-            <List />
-            <Filters />
-          </div>
+          <h2 className="appTitle">Todo app</h2>
+          <Form />
+          <List />
+          <Filters />
         </div>
       </div>
     );

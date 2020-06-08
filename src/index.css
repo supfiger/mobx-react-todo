@@ -12,37 +12,31 @@ code {
     monospace;
 }
 
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 * {
   box-sizing: border-box;
 }
 
-.contentIn::-webkit-scrollbar {
+.content::-webkit-scrollbar {
   width: 8px;
 }
-.contentIn::-webkit-scrollbar-button {
+.content::-webkit-scrollbar-button {
   display: none;
 }
-.contentIn::-webkit-scrollbar-track {
+.content::-webkit-scrollbar-track {
   background-color: #cecece;
   margin: 60px;
   border-radius: 10px;
 }
-.contentIn::-webkit-scrollbar-track-piece {
+.content::-webkit-scrollbar-track-piece {
   display: none;
 }
-.contentIn::-webkit-scrollbar-thumb {
+.content::-webkit-scrollbar-thumb {
   background-color: #484848;
   border-radius: 10px;
 }
-.contentIn::-webkit-scrollbar-corner {
+.content::-webkit-scrollbar-corner {
   background-color: #999;
 }
-.contentIn::-webkit-resizer {
+.content::-webkit-resizer {
   background-color: #666;
 }

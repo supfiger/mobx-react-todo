@@ -65,8 +65,7 @@ export default class TodoStore {
       editing: false,
     };
 
-    list.push(todo);
-    this.list = list;
+    this.list = [...list, todo];
 
     this.resetData();
   };
@@ -89,9 +88,19 @@ export default class TodoStore {
 
   onEditTodo = (id) => {
     const list = [...this.list];
+
+    const editingTodoIndex = list.findIndex((todo) => todo.editing === true);
     const index = list.findIndex((todo) => todo.id === id);
+
+    const editingTodo = list[editingTodoIndex];
+    const isEditing = editingTodo && editingTodo.editing;
     const todo = list[index];
+
     todo.editing = !todo.editing;
+
+    if (isEditing) {
+      editingTodo.editing = false;
+    }
 
     this.list = list;
   };

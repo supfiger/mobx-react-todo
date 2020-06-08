@@ -89,17 +89,21 @@ export default class TodoStore {
 
   onEditTodo = (id) => {
     const list = [...this.list];
-
-    list.map((todo) => {
-      if (todo.id === id) {
-        todo.editing = !todo.editing;
-      }
-    });
+    const index = this.getTodoIndex(id);
+    const todo = list[index];
+    todo.editing = !todo.editing;
 
     this.list = list;
   };
 
-  onSaveTodo = (id) => {};
+  onSaveTodo = (id) => {
+    const list = [...this.list];
+    const index = this.getTodoIndex(id);
+    const todo = list[index];
+    todo.editing = false;
+
+    this.list = list;
+  };
 
   onDeleteTodo = (id) => {
     this.list = this.list.filter((item) => item.id !== id);
@@ -112,21 +116,18 @@ export default class TodoStore {
 
   onChangeTodoInput = (id, e) => {
     const list = [...this.list];
-
-    list.map((todo) => {
-      if (todo.id === id) {
-        todo.text = e.target.value;
-      }
-    });
+    const index = this.getTodoIndex(id);
+    const todo = list[index];
+    todo.text = e.target.value;
 
     this.list = list;
   };
 
   onFilterList = (e) => {
-    const filterName = e.target.name;
+    const filter = e.target.name;
     const list = [...this.list];
 
-    switch (filterName) {
+    switch (filter) {
       case "active":
         this.filteredList = list.filter((todo) => !todo.completed);
         break;
@@ -135,7 +136,6 @@ export default class TodoStore {
         break;
       case "all":
         this.filteredList = [];
-        this.list = list;
         break;
       case "clear":
         this.filteredList = [];
@@ -150,8 +150,11 @@ export default class TodoStore {
     this.text = "";
   };
 
-  getFilteredList = () => {
-    return this.filteredList;
+  getTodoIndex = (id) => {
+    const list = [...this.list];
+    const index = list.findIndex((todo) => todo.id === id);
+
+    return index;
   };
 }
 

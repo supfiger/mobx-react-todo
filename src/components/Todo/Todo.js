@@ -39,10 +39,10 @@ const Todo = (props) => {
             name="editTodo"
             type="text"
             value={text}
-            onChange={(id, e) => onChangeTodoInput(id, e)}
+            onChange={(e) => onChangeTodoInput(id, e)}
             // onKeyPress={(e) => onEnterPress(e)}
           />
-          <button onClick={() => onSaveTodo()}>Save</button>
+          <button onClick={() => onSaveTodo(id)}>Save</button>
         </div>
       ) : (
         <div className={classNames("todoText", { textCrossOut: completed })}>

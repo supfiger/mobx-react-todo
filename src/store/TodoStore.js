@@ -26,8 +26,8 @@ export default class TodoStore {
   };
 
   setFocus = () => {
-    const addTodoInput = document.querySelector(".addTodoInput");
-    addTodoInput.focus();
+    const selector = document.querySelector(".addTodoInput");
+    selector.focus();
   };
 
   validate = (text) => {
@@ -82,21 +82,32 @@ export default class TodoStore {
     }
   };
 
-  onEnterPress = (e) => {
-    e.key === "Enter" && this.onAddTodo();
+  onEnterPress = (e, action, id) => {
+    if (e.key === "Enter") {
+      switch (action) {
+        case "save":
+          this.onSaveTodo(id);
+          break;
+        case "add":
+          this.onAddTodo();
+          break;
+        default:
+          break;
+      }
+    }
   };
 
   onEditTodo = (id) => {
     const list = [...this.list];
 
     const editingTodoIndex = list.findIndex((todo) => todo.editing === true);
-    const index = list.findIndex((todo) => todo.id === id);
+    const clickedIndex = list.findIndex((todo) => todo.id === id);
 
     const editingTodo = list[editingTodoIndex];
     const isEditing = editingTodo && editingTodo.editing;
-    const todo = list[index];
+    const clickedTodo = list[clickedIndex];
 
-    todo.editing = !todo.editing;
+    clickedTodo.editing = !clickedTodo.editing;
 
     if (isEditing) {
       editingTodo.editing = false;
@@ -125,6 +136,7 @@ export default class TodoStore {
 
   onChangeTodoInput = (id, e) => {
     const list = [...this.list];
+
     const index = list.findIndex((todo) => todo.id === id);
     const todo = list[index];
     todo.text = e.target.value;
@@ -169,12 +181,8 @@ decorate(TodoStore, {
   toggleComplete: action,
   onChangeFormInput: action,
   onChangeTodoInput: action,
-  setFocus: action,
-  validate: action,
-  todoGetDate: action,
   updateList: action,
   onAddTodo: action,
-  onEnterPress: action,
   onEditTodo: action,
   onSaveTodo: action,
   onDeleteTodo: action,

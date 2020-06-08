@@ -28,7 +28,7 @@ const Form = (props) => {
           placeholder="Type something here..."
           value={text}
           onChange={(e) => onChangeFormInput(e)}
-          onKeyPress={(e) => onEnterPress(e)}
+          onKeyPress={(e) => onEnterPress(e, "add")}
         />
         <button className="clearInputButton" onClick={() => onClearInput()}>
           ×

@@ -41,12 +41,13 @@
   font-size: 13px
   border-radius: 50%
   transition: .15s ease
+  line-height: 1
   &:hover
     color: #fff
-    background: #5aaf32
+    background: #59d28a
   
 .editing
-  background: #5aaf32 
+  background: #59d28a 
   color: #FFF
 
 .todoDelete
@@ -59,7 +60,7 @@
   cursor: pointer
   margin-left: 5px
   transition: .15s ease
-  line-height: 10px
+  line-height: 1
   border-radius: 50%
   &:hover
     color: #fff
@@ -88,3 +89,22 @@
 
 .editTodoWrap
   display: flex
+  input 
+    border: 1px solid #cccccc
+    border-radius: 5px
+    background: transparent
+    font-family: Roboto
+    padding: 3px 10px
+    margin-right: 10px
+    &:focus
+      outline: none
+  
+  button
+    font-family: Roboto
+    background: #59d28a
+    border: 1px solid #50926a
+    border-radius: 5px
+    padding-left: 10px
+    padding-right: 10px
+
+

@@ -27,9 +27,7 @@ const Todo = (props) => {
     <li className="Todo">
       <div
         onClick={() => toggleComplete(id)}
-        className={classNames("todoCompleted", {
-          isCompleted: completed,
-        })}
+        className={classNames("todoCompleted", { isCompleted: completed })}
       >
         {completed && `✓`}
       </div>
@@ -40,7 +38,7 @@ const Todo = (props) => {
             type="text"
             value={text}
             onChange={(e) => onChangeTodoInput(id, e)}
-            // onKeyPress={(e) => onEnterPress(e)}
+            onKeyPress={(e) => onEnterPress(e, "save", id)}
           />
           <button onClick={() => onSaveTodo(id)}>Save</button>
         </div>
@@ -52,9 +50,7 @@ const Todo = (props) => {
       <div className="todoActions">
         <div
           onClick={() => onEditTodo(id)}
-          className={classNames("todoEdit", {
-            editing: editing,
-          })}
+          className={classNames("todoEdit", { editing: editing })}
         >
           ✎
         </div>

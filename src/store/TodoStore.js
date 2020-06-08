@@ -112,14 +112,17 @@ export default class TodoStore {
     const editingTodo = this.getEditingTodo();
     const isEditing = editingTodo && editingTodo.editing;
     const clickedTodo = list[clickedIndex];
+    const isValid = this.validate(clickedTodo.text);
 
-    clickedTodo.editing = !clickedTodo.editing;
+    if (isValid) {
+      clickedTodo.editing = !clickedTodo.editing;
 
-    if (isEditing) {
-      editingTodo.editing = false;
+      if (isEditing) {
+        editingTodo.editing = false;
+      }
+
+      this.list = list;
     }
-
-    this.list = list;
   };
 
   onSaveTodo = (id) => {

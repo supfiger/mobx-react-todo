@@ -89,7 +89,7 @@ export default class TodoStore {
 
   onEditTodo = (id) => {
     const list = [...this.list];
-    const index = this.getTodoIndex(id);
+    const index = list.findIndex((todo) => todo.id === id);
     const todo = list[index];
     todo.editing = !todo.editing;
 
@@ -98,7 +98,7 @@ export default class TodoStore {
 
   onSaveTodo = (id) => {
     const list = [...this.list];
-    const index = this.getTodoIndex(id);
+    const index = list.findIndex((todo) => todo.id === id);
     const todo = list[index];
     todo.editing = false;
 
@@ -116,7 +116,7 @@ export default class TodoStore {
 
   onChangeTodoInput = (id, e) => {
     const list = [...this.list];
-    const index = this.getTodoIndex(id);
+    const index = list.findIndex((todo) => todo.id === id);
     const todo = list[index];
     todo.text = e.target.value;
 
@@ -148,13 +148,6 @@ export default class TodoStore {
 
   onClearInput = () => {
     this.text = "";
-  };
-
-  getTodoIndex = (id) => {
-    const list = [...this.list];
-    const index = list.findIndex((todo) => todo.id === id);
-
-    return index;
   };
 }
 

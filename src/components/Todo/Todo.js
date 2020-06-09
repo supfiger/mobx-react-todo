@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import classNames from "classnames";
 import { observer, inject } from "mobx-react";
 
@@ -23,12 +23,14 @@ const Todo = (props) => {
     },
   } = props;
 
-  const textInput = useRef();
+  const inputRef = useRef();
+
+  useEffect(() => {
+    editing && inputRef.current.focus();
+  });
 
   const editTodo = () => {
     onEditTodo(id);
-
-    !editing && setTimeout(() => textInput.current.focus(), 0);
   };
 
   return (
@@ -48,7 +50,7 @@ const Todo = (props) => {
             value={text}
             onChange={(e) => onChangeTodoInput(id, e)}
             onKeyPress={(e) => onEnterPress(e, "save", id)}
-            ref={textInput}
+            ref={inputRef}
           />
           <button onClick={() => onSaveTodo(id)}>Save</button>
         </div>

@@ -120,8 +120,6 @@ export default class TodoStore {
       if (isEditing) {
         editingTodo.editing = false;
       }
-
-      this.list = list;
     }
   };
 
@@ -133,7 +131,6 @@ export default class TodoStore {
 
     if (isValid) {
       todo.editing = false;
-      this.list = list;
     }
   };
 
@@ -151,9 +148,8 @@ export default class TodoStore {
 
     const index = list.findIndex((todo) => todo.id === id);
     const todo = list[index];
-    todo.text = e.target.value;
 
-    this.list = list;
+    todo.text = e.target.value;
   };
 
   onFilterList = (e) => {
@@ -184,8 +180,6 @@ export default class TodoStore {
   };
 
   onRenderPage = () => {
-    // const editingTodo = this.getEditingTodo();
-
     this.setFocus();
   };
 }

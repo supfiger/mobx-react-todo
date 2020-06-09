@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/mobx-react-todo/static/css/main.01ae0798.chunk.css",
+    "main.js": "/mobx-react-todo/static/js/main.102cf945.chunk.js",
+    "main.js.map": "/mobx-react-todo/static/js/main.102cf945.chunk.js.map",
+    "runtime-main.js": "/mobx-react-todo/static/js/runtime-main.d3ac492d.js",
+    "runtime-main.js.map": "/mobx-react-todo/static/js/runtime-main.d3ac492d.js.map",
+    "static/js/2.9d1c594a.chunk.js": "/mobx-react-todo/static/js/2.9d1c594a.chunk.js",
+    "static/js/2.9d1c594a.chunk.js.map": "/mobx-react-todo/static/js/2.9d1c594a.chunk.js.map",
+    "index.html": "/mobx-react-todo/index.html",
+    "precache-manifest.36274fad03ba3790ef505be41805d80f.js": "/mobx-react-todo/precache-manifest.36274fad03ba3790ef505be41805d80f.js",
+    "service-worker.js": "/mobx-react-todo/service-worker.js",
+    "static/css/main.01ae0798.chunk.css.map": "/mobx-react-todo/static/css/main.01ae0798.chunk.css.map",
+    "static/js/2.9d1c594a.chunk.js.LICENSE.txt": "/mobx-react-todo/static/js/2.9d1c594a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d3ac492d.js",
+    "static/js/2.9d1c594a.chunk.js",
+    "static/css/main.01ae0798.chunk.css",
+    "static/js/main.102cf945.chunk.js"
+  ]
+}

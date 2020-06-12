@@ -1,5 +1,5 @@
 # Mobx CRUD Todo application
-App using firebase for persist data on client.
+App using localstorage for persist data on client.
 
 ### Watch demo:
 http://supfiger.github.io/mobx-react-todo
